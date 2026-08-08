@@ -14,7 +14,14 @@
   <!-- ================= Header ================= -->
   <header class="site-header">
     <nav class="nav nav--left" aria-label="Primary">
-      <a href="#work" data-nav>Work</a>
+      <span class="nav-item nav-item--dropdown">
+        <a href="#work" data-nav data-dropdown-trigger aria-haspopup="true" aria-expanded="false">Work</a>
+        <span class="nav-dropdown" role="menu">
+          <a href="#work-clients" role="menuitem">For Clients</a>
+          <a href="#work-personal" role="menuitem">Personal</a>
+          <a href="#work-written" role="menuitem">Written</a>
+        </span>
+      </span>
       <a href="#about" data-nav>About</a>
       <a href="#press" data-nav>Press</a>
     </nav>
@@ -50,36 +57,94 @@
       </p>
     </section>
 
-    <!-- ================= Work band ================= -->
+    <!-- ================= Work ================= -->
     <section id="work" class="work">
       <div class="work__head">
         <h2 class="eyebrow">Selected Work</h2>
       </div>
 
-      <div class="work__band">
-        <a class="tile" href="#" style="--c1:#f5c542; --c2:#e0491f;">
-          <span class="tile__art tile__art--dots"></span>
-          <span class="tile__meta">Data storytelling · Health advocacy</span>
-          <span class="tile__title">Tuberculosis Scrollytelling</span>
-          <span class="tile__body">A scroll-driven narrative visualizing the global TB diagnosis gap — pairing data visualization with a proven diagnostic to drive advocacy.</span>
-          <span class="tile__link">View project →</span>
-        </a>
+      <!-- For Clients -->
+      <div id="work-clients" class="work__group">
+        <h3 class="work__group-title">For Clients</h3>
+        <div class="work__band">
+          <a class="tile" href="#" style="--c1:#f5c542; --c2:#e0491f;">
+            <span class="tile__art tile__art--dots"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Client Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#f7a072; --c2:#c2410c;">
+            <span class="tile__art tile__art--arcs"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Client Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#ffcf8f; --c2:#e08a1f;">
+            <span class="tile__art tile__art--grid"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Client Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+        </div>
+      </div>
 
-        <a class="tile" href="#" style="--c1:#5b8def; --c2:#24238b;">
-          <span class="tile__art tile__art--arcs"></span>
-          <span class="tile__meta">Add your project</span>
-          <span class="tile__title">Project Title</span>
-          <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
-          <span class="tile__link">View project →</span>
-        </a>
+      <!-- Personal -->
+      <div id="work-personal" class="work__group">
+        <h3 class="work__group-title">Personal</h3>
+        <div class="work__band">
+          <a class="tile" href="#" style="--c1:#5b8def; --c2:#24238b;">
+            <span class="tile__art tile__art--arcs"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Personal Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#a78bfa; --c2:#6d28d9;">
+            <span class="tile__art tile__art--dots"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Personal Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#67c9dc; --c2:#0e7490;">
+            <span class="tile__art tile__art--grid"></span>
+            <span class="tile__meta">Add your project</span>
+            <span class="tile__title">Personal Project</span>
+            <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
+            <span class="tile__link">View project →</span>
+          </a>
+        </div>
+      </div>
 
-        <a class="tile" href="#" style="--c1:#3cc8a0; --c2:#0f7a5a;">
-          <span class="tile__art tile__art--grid"></span>
-          <span class="tile__meta">Add your project</span>
-          <span class="tile__title">Project Title</span>
-          <span class="tile__body">A short description of the problem, what you designed, and the outcome. Keep it to two or three sentences.</span>
-          <span class="tile__link">View project →</span>
-        </a>
+      <!-- Written -->
+      <div id="work-written" class="work__group">
+        <h3 class="work__group-title">Written</h3>
+        <div class="work__band">
+          <a class="tile" href="#" style="--c1:#3cc8a0; --c2:#0f7a5a;">
+            <span class="tile__art tile__art--grid"></span>
+            <span class="tile__meta">Add your writing</span>
+            <span class="tile__title">Article Title</span>
+            <span class="tile__body">A short description of the piece — where it was published and what it's about. Keep it to two or three sentences.</span>
+            <span class="tile__link">Read →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#94d82d; --c2:#2f9e44;">
+            <span class="tile__art tile__art--dots"></span>
+            <span class="tile__meta">Add your writing</span>
+            <span class="tile__title">Article Title</span>
+            <span class="tile__body">A short description of the piece — where it was published and what it's about. Keep it to two or three sentences.</span>
+            <span class="tile__link">Read →</span>
+          </a>
+          <a class="tile" href="#" style="--c1:#f78fb2; --c2:#a61e4d;">
+            <span class="tile__art tile__art--arcs"></span>
+            <span class="tile__meta">Add your writing</span>
+            <span class="tile__title">Article Title</span>
+            <span class="tile__body">A short description of the piece — where it was published and what it's about. Keep it to two or three sentences.</span>
+            <span class="tile__link">Read →</span>
+          </a>
+        </div>
       </div>
     </section>
 

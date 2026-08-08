@@ -10,13 +10,41 @@ document.getElementById("year").textContent = new Date().getFullYear();
   if (saved) root.setAttribute("data-theme", saved);
 
   toggle.addEventListener("click", function () {
-    const isDark =
-      root.getAttribute("data-theme") === "dark" ||
-      (!root.getAttribute("data-theme") &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    const next = isDark ? "light" : "dark";
+    // Default (no attribute) is light, so absence counts as light.
+    const current = root.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
+  });
+})();
+
+// Work nav dropdown — hover opens it on desktop (CSS); this adds click/touch
+// toggle, and closes it on outside-click, Escape, or choosing an item.
+(function () {
+  const item = document.querySelector(".nav-item--dropdown");
+  if (!item) return;
+  const trigger = item.querySelector("[data-dropdown-trigger]");
+
+  const close = () => {
+    item.classList.remove("is-open");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.blur(); // drop focus so :focus-within doesn't keep it open
+  };
+
+  trigger.addEventListener("click", function () {
+    const open = item.classList.toggle("is-open");
+    trigger.setAttribute("aria-expanded", String(open));
+    if (!open) trigger.blur();
+  });
+
+  item.querySelectorAll(".nav-dropdown a").forEach((a) =>
+    a.addEventListener("click", close)
+  );
+  document.addEventListener("click", (e) => {
+    if (!item.contains(e.target)) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
   });
 })();
 
