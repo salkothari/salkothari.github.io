@@ -322,17 +322,16 @@ main {
 
 /* ---------- Personal gallery (masonry + lightbox) ---------- */
 .gallery {
-  column-count: 3;
-  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
-@media (max-width: 900px) { .gallery { column-count: 2; } }
-@media (max-width: 560px) { .gallery { column-count: 1; } }
+@media (max-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
 
 .gallery__item {
-  display: block;
   position: relative;
-  break-inside: avoid;
-  margin-bottom: 1rem;
+  aspect-ratio: 1 / 1;
   border-radius: 4px;
   overflow: hidden;
   cursor: zoom-in;
@@ -340,7 +339,8 @@ main {
 }
 .gallery__item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
 }
@@ -394,8 +394,15 @@ main {
   gap: 0.85rem;
   max-width: 100%;
   max-height: 100%;
+  overflow-y: auto;
 }
-.lightbox__img {
+.lightbox__imgs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.lightbox__imgs img {
   max-width: 100%;
   max-height: 84vh;
   width: auto;

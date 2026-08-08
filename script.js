@@ -53,13 +53,22 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const gallery = document.getElementById("personal-gallery");
   const lb = document.getElementById("lightbox");
   if (!gallery || !lb) return;
-  const img = lb.querySelector(".lightbox__img");
+  const imgsWrap = lb.querySelector(".lightbox__imgs");
   const cap = lb.querySelector(".lightbox__cap");
   const closeBtn = lb.querySelector(".lightbox__close");
 
   const open = (item) => {
-    img.src = item.getAttribute("href");
-    img.alt = item.dataset.title || "";
+    const list = (item.dataset.images || item.getAttribute("href") || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    imgsWrap.innerHTML = "";
+    list.forEach((src) => {
+      const im = document.createElement("img");
+      im.src = src;
+      im.alt = item.dataset.title || "";
+      imgsWrap.appendChild(im);
+    });
     const bits = [item.dataset.title, item.dataset.medium, item.dataset.date].filter(
       (b) => b && b !== "—"
     );
@@ -71,7 +80,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const close = () => {
     lb.classList.remove("is-open");
     lb.setAttribute("aria-hidden", "true");
-    img.src = "";
+    imgsWrap.innerHTML = "";
     document.body.style.overflow = "";
   };
 
