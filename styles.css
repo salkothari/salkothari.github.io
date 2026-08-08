@@ -233,14 +233,9 @@ main {
 /* subsections: For Clients / Personal / Written */
 .work__group { scroll-margin-top: 110px; }
 .work__group + .work__group { margin-top: clamp(2.75rem, 6vw, 4.5rem); }
-.work__group-title {
-  font-family: inherit;
-  font-weight: 700;
-  font-size: clamp(1.35rem, 3vw, 1.9rem);
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 1.4rem;
-}
+/* Titles use the .eyebrow style (matches the "About" heading); this only
+   handles spacing. */
+.work__group-title { margin-bottom: 1.4rem; }
 
 .work__band {
   display: grid;
