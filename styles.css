@@ -283,6 +283,15 @@ main {
     linear-gradient(90deg, #fff 1.5px, transparent 1.5px);
   background-size: 24px 24px;
 }
+/* Real thumbnail image covers the gradient/pattern fallback when present. */
+.tile__art img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .tile__meta {
   color: var(--accent);
