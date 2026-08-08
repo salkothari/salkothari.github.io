@@ -19,3 +19,31 @@ document.getElementById("year").textContent = new Date().getFullYear();
     localStorage.setItem("theme", next);
   });
 })();
+
+// Scrollspy — highlight the nav link for the section in view (Lupi-style
+// orange active state).
+(function () {
+  const links = [...document.querySelectorAll("[data-nav]")];
+  const map = new Map();
+  links.forEach((a) => {
+    const id = a.getAttribute("href").slice(1);
+    const section = document.getElementById(id);
+    if (section) map.set(section, a);
+  });
+  if (!map.size) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          links.forEach((a) => a.classList.remove("is-active"));
+          const active = map.get(entry.target);
+          if (active) active.classList.add("is-active");
+        }
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" }
+  );
+
+  map.forEach((_, section) => observer.observe(section));
+})();
