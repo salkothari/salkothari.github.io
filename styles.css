@@ -452,6 +452,58 @@ main {
 }
 .contact__links a:hover { color: var(--accent); }
 
+/* ---------- Project pages (Behance-style galleries) ---------- */
+.project { max-width: 1180px; margin: 0 auto; padding: 0 var(--gap) 5rem; }
+.project__back {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.project__back:hover { color: var(--accent); }
+
+.project__intro {
+  padding: 2rem 0 2.5rem;
+  max-width: 62ch;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.project__intro .eyebrow { color: var(--accent); }
+.project__title {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.7rem 0 0;
+}
+.project__lead {
+  margin-top: 1rem;
+  color: var(--text);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+.project__external {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.project__external:hover { text-decoration: underline; }
+
+.project__gallery { display: flex; flex-direction: column; gap: 0.6rem; }
+.project__gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  background: var(--surface);
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   max-width: var(--maxw);
