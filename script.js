@@ -48,6 +48,22 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 
+// Personal gallery "See more" — reveal tiles beyond the first 8.
+(function () {
+  const g = document.getElementById("personal-gallery");
+  const btn = document.getElementById("gallery-more");
+  if (!g || !btn) return;
+  if (g.querySelectorAll(".gallery__item").length <= 8) {
+    btn.parentElement.style.display = "none";
+    return;
+  }
+  btn.addEventListener("click", function () {
+    const expanded = g.classList.toggle("is-expanded");
+    btn.setAttribute("aria-expanded", String(expanded));
+    btn.textContent = expanded ? "Show less" : "See more";
+  });
+})();
+
 // Personal gallery lightbox — click a tile to enlarge the image.
 (function () {
   const gallery = document.getElementById("personal-gallery");

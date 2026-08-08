@@ -372,6 +372,38 @@ main {
   letter-spacing: 0.08em;
 }
 
+/* collapsed state: show only the first 8 tiles until expanded */
+.gallery:not(.is-expanded) .gallery__item:nth-child(n + 9) { display: none; }
+
+.gallery-more { text-align: center; margin-top: 1.75rem; }
+.gallery-more__btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.gallery-more__btn:hover { border-color: var(--accent); color: var(--accent); }
+.gallery-more__btn::after {
+  content: "";
+  display: inline-block;
+  width: 0.34em;
+  height: 0.34em;
+  margin-left: 0.55em;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.15em) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.gallery-more__btn[aria-expanded="true"]::after { transform: translateY(0.05em) rotate(-135deg); }
+
 /* lightbox */
 .lightbox {
   position: fixed;
