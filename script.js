@@ -48,6 +48,48 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 
+// Personal gallery lightbox — click a tile to enlarge the image.
+(function () {
+  const gallery = document.getElementById("personal-gallery");
+  const lb = document.getElementById("lightbox");
+  if (!gallery || !lb) return;
+  const img = lb.querySelector(".lightbox__img");
+  const cap = lb.querySelector(".lightbox__cap");
+  const closeBtn = lb.querySelector(".lightbox__close");
+
+  const open = (item) => {
+    img.src = item.getAttribute("href");
+    img.alt = item.dataset.title || "";
+    const bits = [item.dataset.title, item.dataset.medium, item.dataset.date].filter(
+      (b) => b && b !== "—"
+    );
+    cap.textContent = bits.join("  ·  ");
+    lb.classList.add("is-open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+  const close = () => {
+    lb.classList.remove("is-open");
+    lb.setAttribute("aria-hidden", "true");
+    img.src = "";
+    document.body.style.overflow = "";
+  };
+
+  gallery.querySelectorAll(".gallery__item").forEach((a) =>
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(a);
+    })
+  );
+  closeBtn.addEventListener("click", close);
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+})();
+
 // Scrollspy — highlight the nav link for the section in view (Lupi-style
 // orange active state).
 (function () {
