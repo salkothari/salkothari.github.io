@@ -196,6 +196,18 @@ a { color: inherit; text-decoration: none; }
 }
 .marquee__dot { color: var(--accent); margin-left: 1.6rem; }
 
+/* clickable ticker: no underline, but signalled by the arrow + hover color */
+.marquee__link { cursor: pointer; transition: color 0.2s ease; }
+.marquee__link:hover { color: var(--accent); }
+.marquee__arrow {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 0.45rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.marquee__link:hover .marquee__arrow { transform: translate(2px, -2px); }
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
