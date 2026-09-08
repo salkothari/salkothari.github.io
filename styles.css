@@ -487,7 +487,9 @@ main {
 }
 .about__photo img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 16%;
   display: block;
   border-radius: 10px;
 }
