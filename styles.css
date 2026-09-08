@@ -15,7 +15,7 @@
   --border: #ecece8;
   --accent: #e0491f;         /* Lupi's warm orange-red */
   --maxw: 1360px;
-  --gap: clamp(1.25rem, 5vw, 3rem);
+  --gap: clamp(1rem, 2.5vw, 2rem);
 }
 
 :root[data-theme="dark"] {
@@ -679,9 +679,11 @@ main {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 860px) {
+/* Stack the About (photo on top, text full width) below 1100px so the bio
+   never gets squeezed into a narrow column with many lines. */
+@media (max-width: 1100px) {
   .about { grid-template-columns: 1fr; }
-  .about__photo { order: -1; max-width: 320px; }
+  .about__photo { order: -1; max-width: 340px; }
 }
 
 @media (max-width: 620px) {
