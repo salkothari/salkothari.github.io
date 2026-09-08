@@ -225,7 +225,7 @@ main {
 
 /* ---------- Intro statement ---------- */
 .intro {
-  padding: clamp(4rem, 12vw, 9rem) 0 clamp(3.5rem, 9vw, 7rem);
+  padding: clamp(3.5rem, 11vw, 8rem) 0 clamp(1.75rem, 4vw, 2.75rem);
   text-align: center;
 }
 .intro__statement {
@@ -239,7 +239,7 @@ main {
 }
 
 /* ---------- Work band ---------- */
-.work { padding: clamp(3rem, 7vw, 5rem) 0; }
+.work { padding: clamp(1rem, 3vw, 2rem) 0 clamp(3rem, 7vw, 5rem); }
 .work__head { text-align: center; margin-bottom: 2.5rem; }
 
 /* subsections: For Clients / Personal / Written */
@@ -685,18 +685,23 @@ main {
 }
 
 @media (max-width: 620px) {
+  /* wordmark on top; both nav groups share a single row below it */
   .site-header {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 0.75rem;
-    padding: 1.1rem var(--gap);
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "brand brand"
+      "navl  navr";
+    justify-content: center;
+    align-items: start;
+    column-gap: clamp(0.5rem, 3vw, 1rem);
+    row-gap: 0.55rem;
+    padding: 0.95rem var(--gap);
   }
-  .wordmark { grid-column: 1; order: -1; }
-  .nav--left, .nav--right { justify-self: center; }
-
-  /* Work dropdown expands inline (in-flow) on mobile instead of floating,
-     so it never overlaps the stacked header rows. */
-  .nav--left { align-items: flex-start; }
+  .wordmark { grid-area: brand; justify-self: center; }
+  .nav--left  { grid-area: navl; justify-self: end; align-items: flex-start; }
+  .nav--right { grid-area: navr; justify-self: start; }
+  .nav { gap: clamp(0.4rem, 2.4vw, 0.85rem); }
+  .nav a, .nav-dropdown a { font-size: 0.7rem; letter-spacing: 0.06em; }
   .nav-item--dropdown { flex-direction: column; align-items: flex-start; }
   .nav-dropdown {
     position: static;
