@@ -14,7 +14,7 @@
   --muted: #a3a29d;          /* idle nav */
   --border: #ecece8;
   --accent: #e0491f;         /* Lupi's warm orange-red */
-  --maxw: 1360px;
+  --maxw: 1600px;
   --gap: clamp(1rem, 2.5vw, 2rem);
 }
 
