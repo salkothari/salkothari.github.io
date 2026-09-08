@@ -14,7 +14,7 @@
   --muted: #a3a29d;          /* idle nav */
   --border: #ecece8;
   --accent: #e0491f;         /* Lupi's warm orange-red */
-  --maxw: 1180px;
+  --maxw: 1360px;
   --gap: clamp(1.25rem, 5vw, 3rem);
 }
 
@@ -479,8 +479,8 @@ main {
 /* ---------- About ---------- */
 .about {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: clamp(2rem, 6vw, 4.5rem);
+  grid-template-columns: 1fr 1.75fr;
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
   padding: clamp(3.5rem, 9vw, 7rem) 0;
   border-top: 1px solid var(--border);
