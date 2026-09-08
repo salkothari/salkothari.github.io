@@ -234,7 +234,7 @@ main {
   font-size: clamp(1.6rem, 4.4vw, 3.1rem);
   line-height: 1.24;
   letter-spacing: -0.01em;
-  max-width: 20ch;
+  max-width: 27ch;
   margin: 0 auto;
 }
 
@@ -479,16 +479,12 @@ main {
 /* ---------- About ---------- */
 .about {
   display: grid;
-  /* photo + a fixed-measure text column (~600px) so the bio stays ~5 lines
-     at any screen width or zoom */
-  grid-template-columns: minmax(260px, 360px) minmax(0, 600px);
-  gap: clamp(2rem, 4vw, 3.5rem);
-  justify-content: center;
+  grid-template-columns: 1fr 1.75fr;
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
   padding: clamp(3.5rem, 9vw, 7rem) 0;
   border-top: 1px solid var(--border);
 }
-.about__text { max-width: 600px; }
 .about__photo img {
   width: 100%;
   height: auto;
@@ -683,12 +679,9 @@ main {
 }
 
 /* ---------- Responsive ---------- */
-/* Stack the About (photo on top) below 1080px, where a two-column layout
-   would squeeze the text narrower than 600px and add lines. The text stays
-   capped at 600px when stacked, so the bio remains ~5 lines. */
-@media (max-width: 1080px) {
-  .about { grid-template-columns: 1fr; justify-content: start; }
-  .about__photo { order: -1; max-width: 320px; }
+@media (max-width: 1000px) {
+  .about { grid-template-columns: 1fr; }
+  .about__photo { order: -1; max-width: 340px; }
 }
 
 @media (max-width: 620px) {
