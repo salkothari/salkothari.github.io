@@ -485,14 +485,21 @@ main {
   padding: clamp(3.5rem, 9vw, 7rem) 0;
   border-top: 1px solid var(--border);
 }
+.about__photo {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .about__photo img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 52%;
   display: block;
-  border-radius: 10px;
 }
+/* hover caption, matching the Personal gallery tiles */
+.about__photo:hover .gallery__cap,
+.about__photo:focus-within .gallery__cap { opacity: 1; transform: none; }
 .about__body p {
   font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   line-height: 1.55;
