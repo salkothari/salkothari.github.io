@@ -481,7 +481,7 @@ main {
   display: grid;
   /* photo + a fixed-measure text column (~600px) so the bio stays ~5 lines
      at any screen width or zoom */
-  grid-template-columns: minmax(260px, 440px) minmax(0, 600px);
+  grid-template-columns: minmax(260px, 360px) minmax(0, 600px);
   gap: clamp(2rem, 4vw, 3.5rem);
   justify-content: center;
   align-items: center;
@@ -683,8 +683,10 @@ main {
 }
 
 /* ---------- Responsive ---------- */
-/* Stack the About (photo on top) on small screens. */
-@media (max-width: 820px) {
+/* Stack the About (photo on top) below 1080px, where a two-column layout
+   would squeeze the text narrower than 600px and add lines. The text stays
+   capped at 600px when stacked, so the bio remains ~5 lines. */
+@media (max-width: 1080px) {
   .about { grid-template-columns: 1fr; justify-content: start; }
   .about__photo { order: -1; max-width: 320px; }
 }
