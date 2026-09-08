@@ -698,28 +698,11 @@ main {
     padding: 0.95rem var(--gap);
   }
   .wordmark { grid-area: brand; justify-self: center; }
-  .nav--left  { grid-area: navl; justify-self: end; align-items: flex-start; }
-  .nav--right { grid-area: navr; justify-self: start; }
+  /* center both groups on the same line (the toggle is taller than the text) */
+  .nav--left  { grid-area: navl; justify-self: end; align-self: center; }
+  .nav--right { grid-area: navr; justify-self: start; align-self: center; }
   .nav { gap: clamp(0.4rem, 2.4vw, 0.85rem); }
-  .nav a, .nav-dropdown a { font-size: 0.7rem; letter-spacing: 0.06em; }
-  .nav-item--dropdown { flex-direction: column; align-items: flex-start; }
-  .nav-dropdown {
-    position: static;
-    transform: none;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    min-width: 0;
-    padding: 0.2rem 0 0;
-    align-items: center;
-    display: none;
-  }
-  .nav-item:hover .nav-dropdown,
-  .nav-item.is-open .nav-dropdown {
-    display: flex;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-  }
-  .nav-dropdown a { padding: 0.4rem 0.5rem; }
+  .nav a { font-size: 0.7rem; letter-spacing: 0.06em; }
+  /* Work dropdown floats (like desktop) so opening it never shifts the row */
+  .nav-dropdown a { padding: 0.5rem 0.65rem; font-size: 0.74rem; letter-spacing: 0.08em; }
 }
