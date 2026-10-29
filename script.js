@@ -1,6 +1,76 @@
 // Current year in footer
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Hero entrance — type the intro statement out on arrival (keeps the accent
+// word orange as it's typed). Falls back to the full text when motion is
+// reduced.
+(function () {
+  const hero = document.querySelector(".intro__statement");
+  if (!hero) return;
+
+  // Read the existing markup into typed segments (text + whether accented).
+  const segments = [];
+  hero.childNodes.forEach((node) => {
+    if (node.nodeType === 3) segments.push({ text: node.textContent, accent: false });
+    else if (node.nodeType === 1)
+      segments.push({ text: node.textContent, accent: node.classList.contains("accent") });
+  });
+  segments.forEach((s) => (s.text = s.text.replace(/\s+/g, " ")));
+  if (segments.length) {
+    segments[0].text = segments[0].text.replace(/^\s+/, "");
+    segments[segments.length - 1].text = segments[segments.length - 1].text.replace(/\s+$/, "");
+  }
+  const full = segments.map((s) => s.text).join("");
+  hero.setAttribute("aria-label", full);
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // Reserve the final height so lines filling in don't shift the page.
+  hero.style.minHeight = hero.offsetHeight + "px";
+
+  const chars = [];
+  segments.forEach((s) => {
+    for (const ch of s.text) chars.push({ ch, accent: s.accent });
+  });
+
+  hero.textContent = "";
+  const caret = document.createElement("span");
+  caret.className = "hero-caret";
+  caret.setAttribute("aria-hidden", "true");
+  hero.appendChild(caret);
+
+  let i = 0;
+  let span = null;
+  let spanAccent = null;
+
+  function type() {
+    if (i >= chars.length) {
+      setTimeout(() => {
+        caret.classList.add("hero-caret--done");
+        setTimeout(() => caret.remove(), 450);
+      }, 1500);
+      return;
+    }
+    const { ch, accent } = chars[i];
+    if (accent !== spanAccent) {
+      span = document.createElement("span");
+      if (accent) span.className = "accent";
+      hero.insertBefore(span, caret);
+      spanAccent = accent;
+    }
+    span.appendChild(document.createTextNode(ch));
+    i++;
+
+    let delay = 32 + Math.random() * 34; // human-ish rhythm
+    if (ch === " ") delay = 26;
+    else if (ch === ",") delay = 260;
+    else if (ch === ".") delay = 380;
+    setTimeout(type, delay);
+  }
+
+  setTimeout(type, 350); // let the page settle, then begin
+})();
+
 // Theme toggle with localStorage persistence
 (function () {
   const root = document.documentElement;
