@@ -46,8 +46,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const heroChars = toChars(segments);
   const greetingChars = toChars([
     { text: "Hi, I'm ", accent: false },
-    { text: "Saloni", accent: true },
-    { text: "!", accent: false },
+    { text: "Saloni!", accent: true },
   ]);
 
   hero.textContent = "";
