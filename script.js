@@ -35,10 +35,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
   // Reserve the final height so lines filling in don't shift the page.
   hero.style.minHeight = hero.offsetHeight + "px";
 
-  const chars = [];
-  segments.forEach((s) => {
-    for (const ch of s.text) chars.push({ ch, accent: s.accent });
-  });
+  // Flatten a list of {text, accent} segments into per-character entries.
+  const toChars = (segs) => {
+    const out = [];
+    segs.forEach((s) => {
+      for (const ch of s.text) out.push({ ch, accent: s.accent });
+    });
+    return out;
+  };
+  const heroChars = toChars(segments);
+  const greetingChars = toChars([
+    { text: "Hi, I'm ", accent: false },
+    { text: "Saloni", accent: true },
+    { text: "!", accent: false },
+  ]);
 
   hero.textContent = "";
   const caret = document.createElement("span");
@@ -46,37 +56,59 @@ document.getElementById("year").textContent = new Date().getFullYear();
   caret.setAttribute("aria-hidden", "true");
   hero.appendChild(caret);
 
-  let i = 0;
-  let span = null;
-  let spanAccent = null;
-
-  function type() {
-    if (i >= chars.length) {
-      revealAll(); // fade the rest of the page in
-      setTimeout(() => {
-        caret.classList.add("hero-caret--done");
-        setTimeout(() => caret.remove(), 450);
-      }, 1500);
-      return;
-    }
-    const { ch, accent } = chars[i];
-    if (accent !== spanAccent) {
-      span = document.createElement("span");
-      if (accent) span.className = "accent";
-      hero.insertBefore(span, caret);
-      spanAccent = accent;
-    }
-    span.appendChild(document.createTextNode(ch));
-    i++;
-
-    let delay = 32 + Math.random() * 34; // human-ish rhythm
-    if (ch === " ") delay = 26;
-    else if (ch === ",") delay = 260;
-    else if (ch === ".") delay = 380;
-    setTimeout(type, delay);
+  // Type one list of characters, then call done().
+  function typeChars(list, done) {
+    let i = 0;
+    let span = null;
+    let spanAccent = null;
+    (function step() {
+      if (i >= list.length) return done();
+      const { ch, accent } = list[i];
+      if (accent !== spanAccent) {
+        span = document.createElement("span");
+        if (accent) span.className = "accent";
+        hero.insertBefore(span, caret);
+        spanAccent = accent;
+      }
+      span.appendChild(document.createTextNode(ch));
+      i++;
+      let delay = 30 + Math.random() * 32;
+      if (ch === " ") delay = 24;
+      else if (ch === ",") delay = 200;
+      else if (ch === "!") delay = 260;
+      else if (ch === ".") delay = 360;
+      setTimeout(step, delay);
+    })();
   }
 
-  setTimeout(type, 350); // let the page settle, then begin
+  // Backspace everything currently typed, then call done().
+  function erase(done) {
+    const last = caret.previousElementSibling;
+    if (!last) return done();
+    const t = last.lastChild;
+    if (t && t.nodeType === 3 && t.data.length > 1) t.data = t.data.slice(0, -1);
+    else last.remove();
+    setTimeout(() => erase(done), 18);
+  }
+
+  function finish() {
+    revealAll(); // fade the rest of the page in
+    setTimeout(() => {
+      caret.classList.add("hero-caret--done");
+      setTimeout(() => caret.remove(), 450);
+    }, 1500);
+  }
+
+  // Sequence: greet → hold → erase → type the hero line → reveal.
+  setTimeout(() => {
+    typeChars(greetingChars, () => {
+      setTimeout(() => {
+        erase(() => {
+          setTimeout(() => typeChars(heroChars, finish), 160);
+        });
+      }, 750);
+    });
+  }, 350);
 })();
 
 // Theme toggle with localStorage persistence
