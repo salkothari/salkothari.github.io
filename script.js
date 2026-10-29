@@ -6,7 +6,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // reduced.
 (function () {
   const hero = document.querySelector(".intro__statement");
-  if (!hero) return;
+  const revealAll = () => document.documentElement.classList.remove("hero-intro-active");
+  if (!hero) {
+    revealAll();
+    return;
+  }
 
   // Read the existing markup into typed segments (text + whether accented).
   const segments = [];
@@ -23,7 +27,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const full = segments.map((s) => s.text).join("");
   hero.setAttribute("aria-label", full);
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    revealAll();
+    return;
+  }
 
   // Reserve the final height so lines filling in don't shift the page.
   hero.style.minHeight = hero.offsetHeight + "px";
@@ -45,6 +52,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   function type() {
     if (i >= chars.length) {
+      revealAll(); // fade the rest of the page in
       setTimeout(() => {
         caret.classList.add("hero-caret--done");
         setTimeout(() => caret.remove(), 450);

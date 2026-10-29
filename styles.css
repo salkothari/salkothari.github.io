@@ -258,6 +258,21 @@ main {
   transition: opacity 0.4s ease;
 }
 
+/* while the hero types, fade everything else toward the background; it eases
+   back in once typing completes (the .hero-intro-active class is removed) */
+.site-header,
+.marquee,
+.site-footer,
+main > section:not(.intro) {
+  transition: opacity 0.9s ease;
+}
+.hero-intro-active .site-header,
+.hero-intro-active .marquee,
+.hero-intro-active .site-footer,
+.hero-intro-active main > section:not(.intro) {
+  opacity: 0.08;
+}
+
 /* ---------- Work band ---------- */
 .work { padding: clamp(1rem, 3vw, 2rem) 0 clamp(3rem, 7vw, 5rem); }
 .work__head { text-align: center; margin-bottom: 2.5rem; }
