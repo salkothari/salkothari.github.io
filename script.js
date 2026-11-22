@@ -201,6 +201,14 @@ document.getElementById("year").textContent = new Date().getFullYear();
     lb.classList.add("is-open");
     lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    // analytics: record which gallery piece was opened
+    if (window.goatcounter && window.goatcounter.count) {
+      const slug = (item.dataset.title || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+      window.goatcounter.count({ path: "gallery-" + slug, title: item.dataset.title, event: true });
+    }
   };
   const close = () => {
     lb.classList.remove("is-open");
