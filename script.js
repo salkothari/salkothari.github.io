@@ -32,6 +32,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
     return;
   }
 
+  // Only animate on the first arrival this session; show the static hero on
+  // return visits (e.g. coming back from a project page).
+  let heroPlayed = false;
+  try {
+    heroPlayed = !!sessionStorage.getItem("heroPlayed");
+  } catch (e) {}
+  if (heroPlayed) {
+    revealAll();
+    return;
+  }
+  try {
+    sessionStorage.setItem("heroPlayed", "1");
+  } catch (e) {}
+
   // Reserve the final height so lines filling in don't shift the page.
   hero.style.minHeight = hero.offsetHeight + "px";
 

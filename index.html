@@ -8,11 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=29" />
+  <link rel="stylesheet" href="styles.css?v=30" />
   <script>
-    // Dim everything but the hero until it finishes typing (set before paint).
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
-      document.documentElement.classList.add("hero-intro-active");
+    // Dim everything but the hero until it finishes typing, but only on the
+    // first arrival this session (set before paint to avoid a flash).
+    try {
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          !sessionStorage.getItem("heroPlayed"))
+        document.documentElement.classList.add("hero-intro-active");
+    } catch (e) {}
   </script>
 </head>
 <body>
@@ -289,7 +293,7 @@
     <!-- ================= About ================= -->
     <section id="about" class="about">
       <div class="about__photo">
-        <img src="assets/about/saloni.jpg?v=29" alt="Saloni Kothari — Harvard University, 2026" loading="lazy" />
+        <img src="assets/about/saloni.jpg?v=30" alt="Saloni Kothari — Harvard University, 2026" loading="lazy" />
         <span class="gallery__cap">
           <span class="gallery__cap-title">Harvard University</span>
           <span class="gallery__cap-meta">2026</span>
@@ -405,7 +409,7 @@
     </figure>
   </div>
 
-  <script src="script.js?v=29"></script>
+  <script src="script.js?v=30"></script>
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://salkothari.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
